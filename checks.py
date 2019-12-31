@@ -411,11 +411,20 @@ def standard_files(url):
     for line in smaps:
         if 'sitemap:' in line.lower():
             found_smaps.append(line.lower().replace('sitemap:', '').strip())
+    
     return_dict["num_sitemaps"] = len(found_smaps)
+    
     if len(found_smaps) > 0:
         return_dict["sitemaps"] = found_smaps
-    
-    # TODO: validate the first sitemap
+        smap_content = httpRequestGetContent(found_smaps[0])
+
+        if not is_sitemap(smap_content):
+            points -= 1
+            review += '* Sitemap verkar vara trasig.\n'
+            return_dict['sitemap_check'] = '\'{0}\' seem to be broken'.format(found_smaps[0])
+        else:
+            review += '* Sitemap verkar fungera.\n'
+            return_dict['sitemap_check'] = '\'{0}\' seem ok'.format(found_smaps[0])
     
     # TODO: validate first feed
     headers = {'user-agent': config.useragent}
