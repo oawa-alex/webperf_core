@@ -434,7 +434,7 @@ def standard_files(url):
     feed = soup.find_all(rel='alternate')
 
     if len(feed) is 0:
-        points -= 1
+        points -= 0.5
         review += '* RSS-prenumeration saknas i meta.\n'
         return_dict['feed'] = 'not in meta'
         return_dict['num_feeds'] = len(feed)
@@ -447,6 +447,9 @@ def standard_files(url):
             tmp_feed.append(single_feed.get('href'))
 
         return_dict['feeds'] = tmp_feed
+    
+    if points < 1:
+        points = 1
 
     return (points, review, return_dict)
 
