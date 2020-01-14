@@ -397,13 +397,14 @@ def standard_files(url):
     else:
         review += '* robots.txt verkar ok.\n'
         return_dict['robots.txt'] = 'ok'
-    if 'sitemap:' not in robots_content.lower():
-        points -= 2
-        review += '* Sitemap anges inte i robots.txt\n'
-        return_dict['sitemap'] = 'not in robots.txt'
-    else:
-        review += '* Sitemap finns omnämnd i robots.txt\n'
-        return_dict['sitemap'] = 'ok'
+        
+        if 'sitemap:' not in robots_content.lower():
+            points -= 2
+            review += '* Sitemap anges inte i robots.txt\n'
+            return_dict['sitemap'] = 'not in robots.txt'
+        else:
+            review += '* Sitemap finns omnämnd i robots.txt\n'
+            return_dict['sitemap'] = 'ok'
 
     smap_pos = robots_content.lower().find('sitemap')
     smaps = robots_content[smap_pos:].split('\n')
