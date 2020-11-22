@@ -488,7 +488,7 @@ def is_sitemap(content):
 
     Attributes: content (string)
     """
-    if 'http://www.sitemaps.org/schemas/sitemap/' in content or '<sitemapindex' in content: 
+    if '://www.sitemaps.org/schemas/sitemap/' in content or '<sitemapindex' in content: 
         return True
 
     return False
