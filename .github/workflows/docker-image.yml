@@ -18,8 +18,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       #run: docker build . --file Dockerfile --tag my-image-name:latest
-      run: docker build . --file Dockerfile
-    - name: list content
+      run: docker build . --file Dockerfile -t webperf-core
+    - name: list folder content
       run: ls
-
-
+    - name: List Docker image(s)
+      run: docker image ls
+    - name: run Docker image webperf-core
+      run: docker container run webperf-core test1 test2 test3
