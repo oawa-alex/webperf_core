@@ -4,4 +4,4 @@
 # or splits `args` in a string separated by whitespace.
 sh -c "echo $*"
 ls
-python3 default.py -h
+python webperf-core/default.py -h

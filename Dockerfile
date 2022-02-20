@@ -5,5 +5,8 @@ FROM python:latest
 #COPY entrypoint.sh /entrypoint.sh
 COPY . /webperf-core
 
+RUN python -m pip install --upgrade pip
+RUN pip install -r /webperf-core/requirements.txt
+
 # Executes `entrypoint.sh` when the Docker container starts up
 ENTRYPOINT ["/webperf-core/entrypoint.sh"]
