@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Change so entrypoint.sh are allowed to execute
+      run: chmod +x entrypoint.sh
     - name: Build the Docker image
       #run: docker build . --file Dockerfile --tag my-image-name:latest
       run: docker build . --file Dockerfile -t webperf-core
