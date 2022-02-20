@@ -6,4 +6,4 @@ FROM debian:stable-slim
 COPY . /webperf-core
 
 # Executes `entrypoint.sh` when the Docker container starts up
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/webperf-core/entrypoint.sh"]
