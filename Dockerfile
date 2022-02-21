@@ -6,8 +6,8 @@ FROM ubuntu:latest
 #COPY entrypoint.sh /entrypoint.sh
 COPY . /webperf-core
 
-RUN sudo apt-get update -y
-RUN sudo apt-get install -y python3.x python3.x-dev --no-install-recommends --force-yes
+RUN apt-get update -y
+RUN apt-get install -y python3.x python3.x-dev --no-install-recommends --force-yes
 
 RUN python -m pip install --upgrade pip
 RUN pip install -r /webperf-core/requirements.txt
