@@ -13,6 +13,12 @@ import gettext
 
 
 def prepare_config_file(sample_filename, filename, is_activated):
+    dir = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
+    dir = Path(dir).parent.parent.absolute()
+
+    sample_filename = os.path.join(dir, sample_filename)
+    filename = os.path.join(dir, filename)
+
     if not os.path.exists(sample_filename):
         print('no sample file exist')
         return False
