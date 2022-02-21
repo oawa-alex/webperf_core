@@ -7,7 +7,7 @@ FROM ubuntu:latest
 COPY . /webperf-core
 
 RUN apt-get update -y
-RUN apt-get install -y python3.x python3.x-dev --no-install-recommends --force-yes
+RUN apt-get install -y python3.x --no-install-recommends
 
 RUN python -m pip install --upgrade pip
 RUN pip install -r /webperf-core/requirements.txt
