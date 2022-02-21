@@ -16,9 +16,7 @@ def create_docker_steps():
     dir = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
     files = os.listdir(dir)
     output = list('')
-    output.append('echo "the PWD is : ${pwd}"\n')
     output.append('cd /webperf-core\n')
-    output.append('echo "the PWD is : ${pwd}"\n')
 
     cmd_history = set()
 
@@ -73,6 +71,11 @@ def create_docker_steps():
                         continue
                     if 'shell: bash' in tmp:
                         continue
+
+                    if 'actions/setup-python' in tmp:
+                        if 'sudo apt-get update -y' not in cmd_history:
+                            output.append('sudo apt-get update -y\n')
+                        tmp = 'sudo apt-get install -y python3.x python3.x-dev --no-install-recommends --force-yes'
 
                     # only add a command once
                     if tmp in cmd_history:
