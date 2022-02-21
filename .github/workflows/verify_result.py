@@ -79,7 +79,7 @@ def create_docker_steps():
                     if tmp in cmd_history:
                         continue
                     cmd_history.add(tmp)
-                    output.append('# ' + tmp + '\n')
+                    output.append('echo "' + tmp + '"\n')
                     output.append(tmp + '\n')
 
     webperf_dir = Path(dir).parent.parent.absolute()
