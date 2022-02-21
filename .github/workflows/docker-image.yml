@@ -16,8 +16,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Change so entrypoint.sh are allowed to execute
-      run: chmod +x entrypoint.sh
+    #- name: Change so entrypoint.sh are allowed to execute
+    #  run: chmod +x entrypoint.sh
+    - name: Download IP2LOCATION DB (Using repository secret)
+      shell: bash
+      env:
+        IP2LOCATION_DOWNLOAD_URL: ${{ secrets.IP2LOCATION_DOWNLOAD_URL }}
+      run: wget -q -O - $IP2LOCATION_DOWNLOAD_URL | tar -xvzf - -C data
+      if: ${{ success() }}
     - name: Build the Docker image
       #run: docker build . --file Dockerfile --tag my-image-name:latest
       run: docker build . --file Dockerfile -t webperf-core

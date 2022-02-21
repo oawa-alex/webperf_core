@@ -66,6 +66,8 @@ def create_docker_steps():
                         continue
                     if 'python default.py' in tmp:
                         continue
+                    if '$IP2LOCATION_DOWNLOAD_URL' in tmp:
+                        continue
                     if tmp.startswith('echo'):
                         continue
                     if tmp.startswith('ls'):
@@ -79,7 +81,6 @@ def create_docker_steps():
                     if tmp in cmd_history:
                         continue
                     cmd_history.add(tmp)
-                    output.append('echo "' + tmp + '"\n')
                     output.append(tmp + '\n')
 
     webperf_dir = Path(dir).parent.parent.absolute()
