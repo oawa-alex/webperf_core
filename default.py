@@ -66,7 +66,7 @@ def main(argv):
 
     # add support for default (en) language
     language = gettext.translation(
-        'webperf-core', localedir='locales', languages=[langCode])
+        'webperf-core', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _ = language.gettext
 
@@ -93,7 +93,7 @@ def main(argv):
             # loop all available languages and verify language exist
             import os
             availableLanguages = list()
-            localeDirs = os.listdir('locales')
+            localeDirs = os.listdir(utils.get_locale_absolute_path())
             foundLang = False
 
             for localeName in localeDirs:
@@ -101,7 +101,7 @@ def main(argv):
                     continue
 
                 languageSubDirectory = os.path.join(
-                    'locales', localeName, "LC_MESSAGES")
+                    utils.get_locale_absolute_path(), localeName, "LC_MESSAGES")
 
                 if (os.path.exists(languageSubDirectory)):
                     availableLanguages.append(localeName)
@@ -111,7 +111,7 @@ def main(argv):
                         foundLang = True
 
                         language = gettext.translation(
-                            'webperf-core', localedir='locales', languages=[langCode])
+                            'webperf-core', localedir=utils.get_locale_absolute_path(), languages=[langCode])
                         language.install()
                         _ = language.gettext
 

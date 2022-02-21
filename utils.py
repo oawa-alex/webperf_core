@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-import sys
-import getopt
+import os
+import os.path
 import datetime
 from models import Sites, SiteTests
-import config
-import gettext
 
 TEST_ALL = -1
 
@@ -174,3 +172,8 @@ def test_sites(_, langCode, sites, test_type=TEST_ALL, show_reviews=False):
         site_index += 1
 
     return results
+
+
+def get_locale_absolute_path():
+    dir = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
+    return os.path.join(dir, 'locales') + os.path.sep
