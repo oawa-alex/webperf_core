@@ -41,6 +41,10 @@ def create_docker_steps():
         if 'tracking' in filename or 'sitespeed' in filename:
             continue
 
+        # ignore pa11y temporarly
+        if 'pa11y' in filename:
+            continue
+
         print('filename:', filename)
 
         filename_full = os.path.join(dir, filename)
