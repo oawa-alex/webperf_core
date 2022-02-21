@@ -85,7 +85,7 @@ def create_docker_steps():
 
     print('docker-cmd.sh:\n', get_file_content(output_filename))
 
-    return False
+    return True
 
 
 def prepare_config_file(sample_filename, filename, is_activated):
