@@ -47,13 +47,6 @@ def create_docker_steps():
             for line in data:
                 tmp = line.strip()
 
-                if 'actions/setup-python' in tmp:
-                    if 'sudo apt-get update -y' not in cmd_history:
-                        cmd_history.add('sudo apt-get update -y')
-                        output.append('sudo apt-get update -y\n')
-                    tmp = 'sudo apt-get install -y python3.x python3.x-dev --no-install-recommends --force-yes'
-                    is_run = True
-
                 if tmp.startswith('if:') or tmp.startswith('- name:') or tmp.startswith('uses:') or tmp.startswith('with:'):
                     is_run = False
                     continue
@@ -79,6 +72,9 @@ def create_docker_steps():
                         continue
                     if 'shell: bash' in tmp:
                         continue
+
+                    if 'sudo ' in tmp:
+                        tmp = tmp[5:]
 
                     # only add a command once
                     if tmp in cmd_history:
