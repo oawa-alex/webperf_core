@@ -19,7 +19,8 @@ RUN python /webperf-core/.github/workflows/verify_result.py -d
 RUN chmod +x /webperf-core/entrypoint.sh
 RUN chmod +x /webperf-core/docker-cmd.sh
 
-RUN pkg install node
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
 
 RUN /webperf-core/docker-cmd.sh
 

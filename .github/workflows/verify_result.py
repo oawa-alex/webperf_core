@@ -76,16 +76,6 @@ def create_docker_steps():
                     if tmp.startswith('sudo '):
                         tmp = tmp[5:]
 
-                    if tmp.startswith('npm'):
-                        cmd = 'curl -fsSL https://deb.nodesource.com/setup_14.x | bash -'
-                        if cmd not in cmd_history:
-                            cmd_history.add(cmd)
-                            output.append(cmd + '\n')
-                        cmd = 'apt-get install - y nodejs'
-                        if cmd not in cmd_history:
-                            cmd_history.add(cmd)
-                            output.append(cmd + '\n')
-
                     # only add a command once
                     if tmp in cmd_history:
                         continue
