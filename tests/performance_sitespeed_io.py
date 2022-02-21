@@ -4,6 +4,7 @@ import os
 from models import Rating
 import datetime
 import config
+import utils
 from tests.utils import *
 import gettext
 _local = gettext.gettext
@@ -45,7 +46,7 @@ def run_test(_, langCode, url):
     - https://www.sitespeed.io
     """
     language = gettext.translation(
-        'performance_sitespeed_io', localedir='locales', languages=[langCode])
+        'performance_sitespeed_io', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 

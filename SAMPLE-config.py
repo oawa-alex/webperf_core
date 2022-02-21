@@ -34,10 +34,5 @@ lighthouse_use_api = True
 # Tells sitespeed if we should use it as a docker image or a npm package
 sitespeed_use_docker = True
 
-# TO BE IMPLEMENTED:
-# locales - where are the lang files located?
-# at services like PythonAnywhere.com you might have to state a path like '/home/your-username/your-webperf-core-folder/locales'
-locales = 'locales'
-
 # how many iterations of Sitespeed.io requests would you like? Has to be at least 2 not to fail
 sitespeed_iterations = 2

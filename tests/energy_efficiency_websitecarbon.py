@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 from decimal import Decimal
 
 import config
+import utils
 from tests.utils import *
 import gettext
 _local = gettext.gettext
@@ -26,7 +27,7 @@ def run_test(_, langCode, url):
     """
 
     language = gettext.translation(
-        'energy_efficiency_websitecarbon', localedir='locales', languages=[langCode])
+        'energy_efficiency_websitecarbon', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 

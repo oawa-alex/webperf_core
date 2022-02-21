@@ -6,6 +6,7 @@ import urllib  # https://docs.python.org/3/library/urllib.parse.html
 from bs4 import BeautifulSoup
 import config
 from tests.utils import *
+import utils
 import gettext
 _local = gettext.gettext
 
@@ -24,7 +25,7 @@ def run_test(_, langCode, url):
     """
 
     language = gettext.translation(
-        'standard_files', localedir='locales', languages=[langCode])
+        'standard_files', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 
@@ -47,7 +48,8 @@ def run_test(_, langCode, url):
 
     # sitemap.xml
     has_robots_txt = return_dict['robots.txt'] == 'ok'
-    sitemap_result = validate_sitemap(_, _local, robots_content, has_robots_txt)
+    sitemap_result = validate_sitemap(
+        _, _local, robots_content, has_robots_txt)
     rating += sitemap_result[0]
     return_dict.update(sitemap_result[1])
 
@@ -187,7 +189,7 @@ def validate_feed(_, _local, url):
     return (rating, return_dict)
 
 
-def validate_security_txt(_,_local, parsed_url):
+def validate_security_txt(_, _local, parsed_url):
     security_wellknown_request = False
     security_root_request = False
 
@@ -262,19 +264,24 @@ def rate_securitytxt_content(content, _, _local):
         # Everything seems ok
         rating.set_overall(5.0, _local("TEXT_SECURITY_OK_CONTENT"))
         rating.set_standards(5.0, _local("TEXT_SECURITY_OK_CONTENT"))
-        rating.set_integrity_and_security(5.0, _local("TEXT_SECURITY_OK_CONTENT"))
+        rating.set_integrity_and_security(
+            5.0, _local("TEXT_SECURITY_OK_CONTENT"))
         return_dict['security.txt'] = 'ok'
     elif not ('contact:' in content.lower()):
         # Missing required Contact
-        rating.set_overall(2.5, _local("TEXT_SECURITY_REQUIRED_CONTACT_MISSING"))
-        rating.set_standards(2.5, _local("TEXT_SECURITY_REQUIRED_CONTACT_MISSING"))
+        rating.set_overall(2.5, _local(
+            "TEXT_SECURITY_REQUIRED_CONTACT_MISSING"))
+        rating.set_standards(2.5, _local(
+            "TEXT_SECURITY_REQUIRED_CONTACT_MISSING"))
         rating.set_integrity_and_security(
             2.5, _local("TEXT_SECURITY_REQUIRED_CONTACT_MISSING"))
         return_dict['security.txt'] = 'required contact missing'
     elif not ('expires:' in content.lower()):
         # Missing required Expires (added in version 10 of draft)
-        rating.set_overall(2.5, _local("TEXT_SECURITY_REQUIRED_EXPIRES_MISSING"))
-        rating.set_standards(2.5, _local("TEXT_SECURITY_REQUIRED_EXPIRES_MISSING"))
+        rating.set_overall(2.5, _local(
+            "TEXT_SECURITY_REQUIRED_EXPIRES_MISSING"))
+        rating.set_standards(2.5, _local(
+            "TEXT_SECURITY_REQUIRED_EXPIRES_MISSING"))
         rating.set_integrity_and_security(
             4.0, _local("TEXT_SECURITY_REQUIRED_EXPIRES_MISSING"))
         return_dict['security.txt'] = 'required expires missing'

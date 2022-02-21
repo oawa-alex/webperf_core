@@ -10,6 +10,7 @@ import config
 import requests
 from bs4 import BeautifulSoup
 from models import Rating
+import utils
 
 from tests.utils import *
 from tests.w3c_base import get_errors
@@ -35,7 +36,7 @@ def run_test(_, langCode, url):
     rating = Rating(_, review_show_improvements_only)
 
     language = gettext.translation(
-        'css_validator_w3c', localedir='locales', languages=[langCode])
+        'css_validator_w3c', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 

@@ -3,6 +3,7 @@ import datetime
 import config
 from tests.lighthouse_base import run_test as lighthouse_base_run_test
 from tests.utils import *
+import utils
 import gettext
 _local = gettext.gettext
 
@@ -24,7 +25,7 @@ def run_test(_, langCode, url, silance=False):
     """
 
     language = gettext.translation(
-        'performance_lighthouse', localedir='locales', languages=[langCode])
+        'performance_lighthouse', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 

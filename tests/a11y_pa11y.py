@@ -4,6 +4,7 @@ import datetime
 import json
 from models import Rating
 import config
+import utils
 import gettext
 _ = gettext.gettext
 
@@ -16,7 +17,7 @@ def run_test(_, langCode, url):
     """
 
     language = gettext.translation(
-        'a11y_pa11y', localedir='locales', languages=[langCode])
+        'a11y_pa11y', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 

@@ -4,6 +4,7 @@ import getopt
 import datetime
 from models import Sites, SiteTests
 import config
+import utils
 import gettext
 import math
 import csv
@@ -96,7 +97,7 @@ def main(argv):
 
     # add support for default (en) language
     language = gettext.translation(
-        'webperf-core', localedir='locales', languages=[langCode])
+        'webperf-core', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _ = language.gettext
 

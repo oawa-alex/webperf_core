@@ -12,6 +12,7 @@ import re
 from bs4 import BeautifulSoup
 import config
 from tests.utils import *
+import utils
 import gettext
 _local = gettext.gettext
 
@@ -42,7 +43,7 @@ def run_test(_, langCode, url, device='phone'):
 
     import time
     language = gettext.translation(
-        'frontend_quality_yellow_lab_tools', localedir='locales', languages=[langCode])
+        'frontend_quality_yellow_lab_tools', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 

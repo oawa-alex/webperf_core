@@ -7,6 +7,7 @@ import re
 # https://docs.python.org/3/library/urllib.parse.html
 from urllib.parse import urlparse
 from tests.utils import *
+import utils
 import datetime
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -777,7 +778,7 @@ def run_test(_, langCode, url):
     rating = Rating(_, review_show_improvements_only)
 
     language = gettext.translation(
-        'tracking_validator', localedir='locales', languages=[langCode])
+        'tracking_validator', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 

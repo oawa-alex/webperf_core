@@ -28,6 +28,7 @@ from bs4 import BeautifulSoup
 import config
 from models import Rating
 from tests.utils import httpRequestGetContent, has_redirect
+import utils
 import gettext
 _local = gettext.gettext
 
@@ -46,7 +47,7 @@ def run_test(_, langCode, url):
     result_dict = {}
 
     language = gettext.translation(
-        'http_validator', localedir='locales', languages=[langCode])
+        'http_validator', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 

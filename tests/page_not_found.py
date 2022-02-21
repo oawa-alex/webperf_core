@@ -12,6 +12,7 @@ import re
 from bs4 import BeautifulSoup
 import config
 from tests.utils import *
+import utils
 import gettext
 _ = gettext.gettext
 
@@ -30,7 +31,7 @@ def run_test(_, langCode, url):
     result_dict = {}
 
     language = gettext.translation(
-        'page_not_found', localedir='locales', languages=[langCode])
+        'page_not_found', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 

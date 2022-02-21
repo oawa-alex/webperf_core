@@ -9,6 +9,7 @@ import requests
 import urllib  # https://docs.python.org/3/library/urllib.parse.html
 import uuid
 import re
+import utils
 from bs4 import BeautifulSoup
 import config
 from tests.utils import *
@@ -32,7 +33,7 @@ def run_test(_, langCode, url):
     rating = Rating(_, review_show_improvements_only)
 
     language = gettext.translation(
-        'privacy_webbkollen', localedir='locales', languages=[langCode])
+        'privacy_webbkollen', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 

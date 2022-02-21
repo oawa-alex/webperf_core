@@ -5,6 +5,7 @@ import re
 import config
 from tests.w3c_base import get_errors
 from tests.utils import *
+import utils
 import gettext
 _local = gettext.gettext
 
@@ -24,7 +25,7 @@ def run_test(_, langCode, url):
     review = ''
 
     language = gettext.translation(
-        'html_validator_w3c', localedir='locales', languages=[langCode])
+        'html_validator_w3c', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 

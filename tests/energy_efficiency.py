@@ -5,6 +5,7 @@ from models import Rating
 import datetime
 import tests.energy_efficiency_carbon_percentiles as energy_efficiency_carbon_percentiles
 from tests.utils import *
+import utils
 import gettext
 _local = gettext.gettext
 
@@ -80,7 +81,7 @@ def run_test(_, langCode, url):
     """
 
     language = gettext.translation(
-        'energy_efficiency_websitecarbon', localedir='locales', languages=[langCode])
+        'energy_efficiency_websitecarbon', localedir=utils.get_locale_absolute_path(), languages=[langCode])
     language.install()
     _local = language.gettext
 
