@@ -37,8 +37,8 @@ def create_docker_steps():
         if 'docker' in filename:
             continue
 
-        # ignore tracking temporarly
-        if 'tracking' in filename:
+        # ignore tracking and sitespeed temporarly
+        if 'tracking' in filename or 'sitespeed' in filename:
             continue
 
         print('filename:', filename)
