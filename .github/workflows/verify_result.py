@@ -73,7 +73,7 @@ def create_docker_steps():
                     if 'shell: bash' in tmp:
                         continue
 
-                    if 'sudo ' in tmp:
+                    if tmp.startswith('sudo '):
                         tmp = tmp[5:]
 
                     # only add a command once
