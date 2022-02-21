@@ -3,5 +3,4 @@
 # `$*` expands the `args` supplied in an `array` individually
 # or splits `args` in a string separated by whitespace.
 sh -c "echo $*"
-ls
-python webperf-core/default.py -h
+python webperf-core/default.py $*

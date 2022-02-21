@@ -26,4 +26,4 @@ jobs:
     - name: List Docker image(s)
       run: docker image ls
     - name: run Docker image webperf-core
-      run: docker container run webperf-core test1 test2 test3
+      run: docker container run webperf-core -h
