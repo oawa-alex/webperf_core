@@ -12,6 +12,82 @@ import getopt
 import gettext
 
 
+def create_docker_steps():
+    dir = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
+    files = os.listdir(dir)
+    output = list('')
+
+    cmd_history = set()
+
+    for filename in files:
+        # Only look at .yml files
+        if '.yml' not in filename:
+            continue
+
+        # ignore codeql-analysis
+        if 'codeql' in filename:
+            continue
+
+        # ignore regression-test-translations
+        if 'translations' in filename:
+            continue
+
+        # ignore docker
+        if 'docker' in filename:
+            continue
+
+        print('filename:', filename)
+
+        filename_full = os.path.join(dir, filename)
+
+        with open(filename_full, 'r') as file:
+            data = file.readlines()
+            is_run = False
+            for line in data:
+                tmp = line.strip()
+                if tmp.startswith('if:') or tmp.startswith('- name:') or tmp.startswith('uses:') or tmp.startswith('with:'):
+                    is_run = False
+                    continue
+
+                if tmp.startswith('run: |'):
+                    is_run = True
+                    continue
+
+                if tmp.startswith('run: '):
+                    tmp = tmp[5:]
+                    is_run = True
+
+                if is_run:
+                    if 'verify_result.py -c' in tmp:
+                        continue
+                    if 'verify_result.py -t' in tmp:
+                        continue
+                    if 'python default.py' in tmp:
+                        continue
+                    if tmp.startswith('echo'):
+                        continue
+                    if tmp.startswith('ls'):
+                        continue
+                    if 'shell: bash' in tmp:
+                        continue
+
+                    # only add a command once
+                    if tmp in cmd_history:
+                        continue
+                    cmd_history.add(tmp)
+                    output.append(tmp + '\n')
+
+    webperf_dir = Path(dir).parent.parent.absolute()
+    output_filename = os.path.join(webperf_dir, 'docker-cmd.sh')
+
+    with open(output_filename, 'w') as outfile:
+        outfile.writelines(output)
+
+    print('docker-cmd.sh:\n', get_file_content(output_filename))
+
+    return False
+
+
 def prepare_config_file(sample_filename, filename, is_activated):
     dir = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
     dir = Path(dir).parent.parent.absolute()
@@ -286,8 +362,8 @@ def main(argv):
     """
 
     try:
-        opts, args = getopt.getopt(argv, "hlc:t:", [
-                                   "help", "test=", "prep-config=", "language"])
+        opts, args = getopt.getopt(argv, "hlc:t:d", [
+                                   "help", "test=", "prep-config=", "language", "docker"])
     except getopt.GetoptError:
         print(main.__doc__)
         sys.exit(2)
@@ -313,6 +389,12 @@ def main(argv):
             break
         elif opt in ("-l", "--language"):
             if validate_translations():
+                sys.exit(0)
+            else:
+                sys.exit(2)
+            break
+        elif opt in ("-d", "--docker"):
+            if create_docker_steps():
                 sys.exit(0)
             else:
                 sys.exit(2)

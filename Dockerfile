@@ -8,6 +8,13 @@ COPY . /webperf-core
 RUN python -m pip install --upgrade pip
 RUN pip install -r /webperf-core/requirements.txt
 RUN python /webperf-core/.github/workflows/verify_result.py -c false
+RUN python /webperf-core/.github/workflows/verify_result.py -d
+
+RUN chmod +x /webperf-core/entrypoint.sh
+RUN chmod +x /webperf-core/docker-cmd.sh
+
+RUN /webperf-core/docker-cmd.sh
+
 
 # Executes `entrypoint.sh` when the Docker container starts up
 ENTRYPOINT ["/webperf-core/entrypoint.sh"]
