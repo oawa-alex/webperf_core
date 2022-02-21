@@ -37,6 +37,10 @@ def create_docker_steps():
         if 'docker' in filename:
             continue
 
+        # ignore tracking temporarly
+        if 'tracking' in filename:
+            continue
+
         print('filename:', filename)
 
         filename_full = os.path.join(dir, filename)

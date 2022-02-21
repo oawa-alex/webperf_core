@@ -10,9 +10,6 @@ RUN apt-get update -y
 #RUN apt-get install -y python3.x --no-install-recommends
 #RUN apt install python3-pip
 
-RUN python -m venv /webperf-core/.venv
-RUN source /webperf-core/.venv/bin/activate
-
 RUN python -m pip install --upgrade pip
 RUN pip install -r /webperf-core/requirements.txt
 RUN python /webperf-core/.github/workflows/verify_result.py -c false
