@@ -16,9 +16,9 @@ def create_docker_steps():
     dir = os.path.dirname(os.path.realpath(__file__)) + os.path.sep
     files = os.listdir(dir)
     output = list('')
-    output.append('echo "the PWD is : ${pwd}"')
-    output.append('cd /webperf-core')
-    output.append('echo "the PWD is : ${pwd}"')
+    output.append('echo "the PWD is : ${pwd}"\n')
+    output.append('cd /webperf-core\n')
+    output.append('echo "the PWD is : ${pwd}"\n')
 
     cmd_history = set()
 
