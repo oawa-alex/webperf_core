@@ -13,8 +13,8 @@ RUN python /webperf-core/.github/workflows/verify_result.py -d
 RUN chmod +x /webperf-core/entrypoint.sh
 RUN chmod +x /webperf-core/docker-cmd.sh
 
-RUN /webperf-core/docker-cmd.sh
-
+RUN cd /webperf-core/
+RUN docker-cmd.sh
 
 # Executes `entrypoint.sh` when the Docker container starts up
 ENTRYPOINT ["/webperf-core/entrypoint.sh"]
