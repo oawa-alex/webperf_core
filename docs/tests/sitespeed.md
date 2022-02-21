@@ -37,7 +37,7 @@ Read more on the [general page for github actions](../getting-started-github-act
 
 On Linux:
 * Update apt-get `sudo apt-get update -y` ( Not needed if you have latest version )
-* Install image library `sudo apt-get install -y imagemagick libjpeg-dev xz-utils --no-install-recommends --force-yes`
+* Install image library `sudo apt-get install -y imagemagick libjpeg-dev xz-utils --no-install-recommends --allow`
 * Upgrade PIP `python -m pip install --upgrade pip` ( Not needed if you have latest version )
 * Install setuptools `python -m pip install --upgrade setuptools`
 * Install ... `python -m pip install pyssim Pillow image`

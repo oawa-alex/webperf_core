@@ -73,13 +73,13 @@ def create_docker_steps():
                     if 'shell: bash' in tmp:
                         continue
 
-                    if tmp.startswith('sudo '):
-                        tmp = tmp[5:]
+                    tmp = tmp.replace('sudo ', '')
 
                     # only add a command once
                     if tmp in cmd_history:
                         continue
                     cmd_history.add(tmp)
+                    output.append('# ' + tmp + '\n')
                     output.append(tmp + '\n')
 
     webperf_dir = Path(dir).parent.parent.absolute()
