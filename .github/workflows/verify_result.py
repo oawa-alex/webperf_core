@@ -84,6 +84,7 @@ def create_docker_steps():
                         continue
 
                     tmp = tmp.replace('sudo ', '')
+                    tmp = tmp.replace('npm install -g ', 'npm install ')
 
                     # only add a command once
                     if tmp in cmd_history:
