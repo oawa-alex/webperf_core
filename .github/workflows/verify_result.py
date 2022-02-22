@@ -17,6 +17,7 @@ def create_docker_steps():
     files = os.listdir(dir)
     output = list('')
     output.append('cd /webperf-core\n')
+    output.append('npm bin')
 
     cmd_history = set()
 
