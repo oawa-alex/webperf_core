@@ -23,5 +23,8 @@ RUN apt-get install -y nodejs
 
 RUN /webperf-core/docker-cmd.sh
 
+# Give us a updated list of project that want funding so we can update it on our page
+RUN npm fund
+
 # Executes `entrypoint.sh` when the Docker container starts up
 ENTRYPOINT ["/webperf-core/entrypoint.sh"]

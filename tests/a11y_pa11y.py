@@ -26,7 +26,7 @@ def run_test(_, langCode, url):
     print(_('TEXT_TEST_START').format(
         datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 
-    bashCommand = "pa11y-ci --reporter json {0}".format(url)
+    bashCommand = "npx pa11y-ci --reporter json {0}".format(url)
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
 
