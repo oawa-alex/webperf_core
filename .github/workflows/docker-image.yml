@@ -34,32 +34,32 @@ jobs:
     - name: run Docker image webperf-core help command
       run: docker container run webperf-core -h
     - name: Test Performance (Google Lighthouse)
-      run: run Docker image webperf-core -t 1 -r -u https://webperf.se/ -o data/testresult-01.json
+      run: docker container run webperf-core -t 1 -r -u https://webperf.se/ -o data/testresult-01.json
       if: ${{ success() }}
     - name: Test 404 (Page not Found)
-      run: run Docker image webperf-core -t 2 -r -u https://webperf.se/ -o data/testresult-02.json
+      run: docker container run webperf-core -t 2 -r -u https://webperf.se/ -o data/testresult-02.json
       if: ${{ success() }}
     - name: Test SEO (Google Lighthouse)
-      run: run Docker image webperf-core -t 4 -r -u https://webperf.se/ -o data/testresult-04.json
+      run: docker container run webperf-core -t 4 -r -u https://webperf.se/ -o data/testresult-04.json
       if: ${{ success() }}
     - name: Test Best Practice (Google Lighthouse)
-      run: run Docker image webperf-core -t 5 -r -u https://webperf.se/ -o data/testresult-05.json
+      run: docker container run webperf-core -t 5 -r -u https://webperf.se/ -o data/testresult-05.json
       if: ${{ success() }}
     - name: Test HTML Validation (false)
-      run: run Docker image webperf-core -t 6 -r -u https://webperf.se/ -o data/testresult-06.json
+      run: docker container run webperf-core -t 6 -r -u https://webperf.se/ -o data/testresult-06.json
       if: ${{ success() }}
     - name: Test CSS Validation
-      run: run Docker image webperf-core -t 7 -r -u https://webperf.se/ -o data/testresult-07.json
+      run: docker container run webperf-core -t 7 -r -u https://webperf.se/ -o data/testresult-07.json
       if: ${{ success() }}
     - name: Test PWA (Google Lighthouse)
-      run: run Docker image webperf-core -t 8 -r -u https://webperf.se/ -o data/testresult-08.json
+      run: docker container run webperf-core -t 8 -r -u https://webperf.se/ -o data/testresult-08.json
       if: ${{ success() }}
     - name: Test Standard files
-      run: run Docker image webperf-core -t 9 -r -u https://webperf.se/ -o data/testresult-09.json
+      run: docker container run webperf-core -t 9 -r -u https://webperf.se/ -o data/testresult-09.json
       if: ${{ success() }}
     - name: Test HTTP & Network
-      run: run Docker image webperf-core -t 21 -r -u https://webperf.se/ -o data/testresult-21.json
+      run: docker container run webperf-core -t 21 -r -u https://webperf.se/ -o data/testresult-21.json
       if: ${{ success() }}
     - name: Test Energy Efficiency (Website Carbon Calculator)
-      run: run Docker image webperf-core -t 22 -r -u https://webperf.se/ -o data/testresult-22.json
+      run: docker container run webperf-core -t 22 -r -u https://webperf.se/ -o data/testresult-22.json
       if: ${{ success() }}
