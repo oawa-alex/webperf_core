@@ -93,6 +93,10 @@ def create_docker_steps():
                     cmd_history.add(tmp)
                     output.append(tmp + '\n')
 
+                    if 'npm install' in tmp:
+                        output.append('ls\n')
+                        output.append('ls node-modules\n')
+
     webperf_dir = Path(dir).parent.parent.absolute()
     output_filename = os.path.join(webperf_dir, 'docker-cmd.sh')
 
