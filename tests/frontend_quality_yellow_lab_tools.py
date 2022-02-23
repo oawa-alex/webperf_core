@@ -77,7 +77,7 @@ def run_test(_, langCode, url, device='phone'):
     else:
         import subprocess
 
-        bashCommand = "npm-run yellowlabtools {0}".format(url)
+        bashCommand = "npm exec yellowlabtools {0}".format(url)
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
 
