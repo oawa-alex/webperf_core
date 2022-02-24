@@ -33,9 +33,9 @@ jobs:
       run: docker image ls
     - name: run Docker image webperf-core help command
       run: docker container run webperf-core -h
-    # - name: Test Performance (Google Lighthouse)
-    #   run: docker container run webperf-core -t 1 -r -u https://webperf.se/ -o data/testresult-01.json
-    #   if: ${{ success() }}
+    - name: Test Performance (Google Lighthouse)
+      run: docker container run webperf-core -t 1 -r -u https://webperf.se/
+      if: ${{ success() }}
     - name: Test 404 (Page not Found)
       run: docker container run webperf-core -t 2 -r -u https://webperf.se/
       if: ${{ success() }}
