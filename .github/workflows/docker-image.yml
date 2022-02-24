@@ -40,7 +40,7 @@ jobs:
       run: docker container run webperf-core -t 2 -r -u https://webperf.se/
       if: ${{ success() }}
     - name: Test SEO (Google Lighthouse)
-     run: docker container run webperf-core -t 4 -r -u https://webperf.se/
+      run: docker container run webperf-core -t 4 -r -u https://webperf.se/
       if: ${{ success() }}
     - name: Test Best Practice (Google Lighthouse)
       run: docker container run webperf-core -t 5 -r -u https://webperf.se/
