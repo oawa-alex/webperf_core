@@ -7,6 +7,7 @@ FROM python:latest
 COPY . /webperf-core
 
 RUN apt-get update -y
+RUN apt-get install default-jre -y
 #RUN apt-get install -y python3.x --no-install-recommends
 #RUN apt install python3-pip
 
