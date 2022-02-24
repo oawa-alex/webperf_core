@@ -46,19 +46,19 @@ jobs:
     #   run: docker container run webperf-core -t 5 -r -u https://webperf.se/ -o data/testresult-05.json
     #   if: ${{ success() }}
     - name: Test HTML Validation (false)
-      run: docker container run webperf-core -t 6 -r -u https://webperf.se/ -o data/testresult-06.json
+      run: docker container run webperf-core -t 6 -r -u https://webperf.se/
       if: ${{ success() }}
     - name: Test CSS Validation
-      run: docker container run webperf-core -t 7 -r -u https://webperf.se/ -o data/testresult-07.json
+      run: docker container run webperf-core -t 7 -r -u https://webperf.se/
       if: ${{ success() }}
     # - name: Test PWA (Google Lighthouse)
     #   run: docker container run webperf-core -t 8 -r -u https://webperf.se/ -o data/testresult-08.json
     #   if: ${{ success() }}
     - name: Test Standard files
-      run: docker container run webperf-core -t 9 -r -u https://webperf.se/ -o data/testresult-09.json
+      run: docker container run webperf-core -t 9 -r -u https://webperf.se/
       if: ${{ success() }}
     - name: Test HTTP & Network
-      run: docker container run webperf-core -t 21 -r -u https://webperf.se/ -o data/testresult-21.json
+      run: docker container run webperf-core -t 21 -r -u https://webperf.se/
       if: ${{ success() }}
     # - name: Test Energy Efficiency (Website Carbon Calculator)
     #   run: docker container run webperf-core -t 22 -r -u https://webperf.se/ -o data/testresult-22.json
