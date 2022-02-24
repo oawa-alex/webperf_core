@@ -84,7 +84,7 @@ def create_docker_steps():
                         continue
 
                     tmp = tmp.replace('sudo ', '')
-                    tmp = tmp.replace('npm install -g ', 'npm install ')
+                    #tmp = tmp.replace('npm install -g ', 'npm install ')
 
                     # only add a command once
                     if tmp in cmd_history:
@@ -92,9 +92,9 @@ def create_docker_steps():
                     cmd_history.add(tmp)
                     output.append(tmp + '\n')
 
-                    if 'npm install' in tmp:
-                        output.append('ls\n')
-                        output.append('ls node_modules\n')
+                    # if 'npm install' in tmp:
+                    #    output.append('ls\n')
+                    #    output.append('ls node_modules\n')
 
     webperf_dir = Path(dir).parent.parent.absolute()
     output_filename = os.path.join(webperf_dir, 'docker-cmd.sh')

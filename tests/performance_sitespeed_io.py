@@ -30,7 +30,7 @@ def get_result(sitespeed_use_docker, arg):
     else:
         import subprocess
 
-        bashCommand = "npm exec sitespeed.io {0}".format(arg)
+        bashCommand = "npm sitespeed.io {0}".format(arg)
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
         result = str(output)
