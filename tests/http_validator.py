@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging
 import http3
 import datetime
 import h2
@@ -181,6 +182,7 @@ def ip_version_score(hostname, _, _local):
 
 
 def protocol_version_score(url, protocol_version, _, _local):
+
     rating = Rating(_, review_show_improvements_only)
     # points = 0.0
     # review = ''
@@ -192,6 +194,7 @@ def protocol_version_score(url, protocol_version, _, _local):
     protocol_translate_name = ''
     protocol_is_secure = False
 
+    logging.captureWarnings(True)
     try:
         if protocol_version == ssl.PROTOCOL_TLS:
             protocol_name = 'TLSv1.3'
@@ -298,6 +301,7 @@ def protocol_version_score(url, protocol_version, _, _local):
         print('error protocol_version_score: {0}'.format(sys.exc_info()[0]))
         pass
 
+    logging.captureWarnings(False)
     return rating
 
 
