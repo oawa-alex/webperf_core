@@ -64,7 +64,7 @@ def main(argv):
     langCode = 'en'
     language = False
 
-    # add support for default (en) language
+    # add support for default (en) language.
     language = gettext.translation(
         'webperf-core', localedir='locales', languages=[langCode])
     language.install()
