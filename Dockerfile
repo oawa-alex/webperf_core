@@ -24,12 +24,41 @@ RUN apt-get install -y nodejs
 
 RUN wget -q -O vnu.jar https://github.com/validator/validator/releases/download/latest/vnu.jar
 
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-RUN apt-get update -y
+#RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
+#RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+#RUN apt-get update -y
 # RUN apt-get --only-upgrade install google-chrome-stable
-RUN apt-get install -y google-chrome-stable
-RUN google-chrome --version
+#RUN apt-get install -y google-chrome-stable
+#RUN google-chrome --version
+
+# Install deps + add Chrome Stable + purge all the things
+RUN apt-get update && apt-get install -y \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  gnupg \
+  --no-install-recommends \
+  && curl -sSL https://deb.nodesource.com/setup_12.x | bash - \
+  && curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+  && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+  && apt-get update && apt-get install -y \
+  google-chrome-stable \
+  fontconfig \
+  fonts-ipafont-gothic \
+  fonts-wqy-zenhei \
+  fonts-thai-tlwg \
+  fonts-kacst \
+  fonts-symbola \
+  fonts-noto \
+  fonts-freefont-ttf \
+  nodejs \
+  --no-install-recommends \
+  && apt-get purge --auto-remove -y curl gnupg \
+  && rm -rf /var/lib/apt/lists/*
+
+# Add Chrome as a user
+#RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
+#  && mkdir -p /home/chrome/reports && chown -R chrome:chrome /home/chrome
 
 RUN npm install -g lighthouse
 RUN npm install -g node-gyp
@@ -40,6 +69,9 @@ RUN apt-get install libjpeg-dev libfontconfig
 
 # Give us a updated list of project that want funding so we can update it on our page
 RUN npm fund
+
+# Run Chrome non-privileged
+# USER chrome
 
 # Executes `entrypoint.sh` when the Docker container starts up
 ENTRYPOINT ["/webperf-core/entrypoint.sh"]
