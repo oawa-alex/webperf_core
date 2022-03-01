@@ -12,7 +12,7 @@ RUN export DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get update -y
 #RUN dpkg --configure -a
-RUN apt-get install apt-utils
+RUN apt-get install apt-utils -y
 
 # Install deps + add Chrome Stable + purge all the things
 RUN apt-get update && apt-get install -y \
@@ -71,7 +71,7 @@ RUN wget -q -O vnu.jar https://github.com/validator/validator/releases/download/
 
 RUN npm install -g lighthouse
 RUN npm install -g node-gyp
-RUN apt-get install libjpeg-dev libfontconfig
+RUN apt-get install libjpeg-dev libfontconfig -y
 #RUN npm install -g yellowlabtools
 
 #RUN /webperf-core/docker-cmd.sh
