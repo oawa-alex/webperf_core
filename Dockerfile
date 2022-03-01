@@ -57,8 +57,8 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/*
 
 # Add Chrome as a user
-#RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
-#  && mkdir -p /home/chrome/reports && chown -R chrome:chrome /home/chrome
+RUN groupadd -r webperf-user && useradd -r -g webperf-user -G audio,video webperf-user \
+  && mkdir -p /home/webperf-user/reports && chown -R webperf-user:webperf-core /home/webperf-user
 
 RUN npm install -g lighthouse
 RUN npm install -g node-gyp
@@ -71,7 +71,7 @@ RUN apt-get install libjpeg-dev libfontconfig
 RUN npm fund
 
 # Run Chrome non-privileged
-# USER chrome
+USER webperf-user
 
 # Executes `entrypoint.sh` when the Docker container starts up
 ENTRYPOINT ["/webperf-core/entrypoint.sh"]
