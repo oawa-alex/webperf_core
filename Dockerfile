@@ -8,6 +8,8 @@ LABEL name="webperf-core" \
 #COPY entrypoint.sh /entrypoint.sh
 COPY . /webperf-core
 
+RUN export DEBIAN_FRONTEND="noninteractive"
+
 RUN apt-get update -y
 #RUN dpkg --configure -a
 RUN apt-get install apt-utils
