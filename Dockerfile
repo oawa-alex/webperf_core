@@ -9,29 +9,8 @@ LABEL name="webperf-core" \
 COPY . /webperf-core
 
 RUN apt-get update -y
-RUN apt-get install default-jre -y
-#RUN apt-get install -y python3.x --no-install-recommends
-#RUN apt install python3-pip
-
-RUN python -m pip install --upgrade pip
-RUN pip install -r /webperf-core/requirements.txt
-RUN python /webperf-core/.github/workflows/verify_result.py -c false
-RUN python /webperf-core/.github/workflows/verify_result.py -d
-
-RUN chmod +x /webperf-core/entrypoint.sh
-RUN chmod +x /webperf-core/docker-cmd.sh
-
-RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt-get install -y nodejs
-
-RUN wget -q -O vnu.jar https://github.com/validator/validator/releases/download/latest/vnu.jar
-
-#RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
-#RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-#RUN apt-get update -y
-# RUN apt-get --only-upgrade install google-chrome-stable
-#RUN apt-get install -y google-chrome-stable
-#RUN google-chrome --version
+RUN dpkg --configure -a
+RUN apt-get install apt-utils
 
 # Install deps + add Chrome Stable + purge all the things
 RUN apt-get update && apt-get install -y \
@@ -57,6 +36,32 @@ RUN apt-get update && apt-get install -y \
   --no-install-recommends \
   && apt-get purge --auto-remove -y curl gnupg \
   && rm -rf /var/lib/apt/lists/*
+
+
+RUN apt-get install default-jre -y
+#RUN apt-get install -y python3.x --no-install-recommends
+#RUN apt install python3-pip
+
+RUN python -m pip install --upgrade pip
+RUN pip install -r /webperf-core/requirements.txt
+RUN python /webperf-core/.github/workflows/verify_result.py -c false
+RUN python /webperf-core/.github/workflows/verify_result.py -d
+
+RUN chmod +x /webperf-core/entrypoint.sh
+RUN chmod +x /webperf-core/docker-cmd.sh
+
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
+RUN wget -q -O vnu.jar https://github.com/validator/validator/releases/download/latest/vnu.jar
+
+#RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
+#RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+#RUN apt-get update -y
+# RUN apt-get --only-upgrade install google-chrome-stable
+#RUN apt-get install -y google-chrome-stable
+#RUN google-chrome --version
+
 
 # Add Chrome as a user
 #RUN groupadd -r webperf-user && useradd -r -g webperf-user -G audio,video webperf-user \
