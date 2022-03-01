@@ -58,7 +58,7 @@ RUN apt-get update && apt-get install -y \
 
 # Add Chrome as a user
 RUN groupadd -r webperf-user && useradd -r -g webperf-user -G audio,video webperf-user \
-  && mkdir -p /home/webperf-user/reports && chown -R webperf-user:webperf-core /home/webperf-user
+  && mkdir -p /home/webperf-user/reports && chown -R webperf-user:webperf-user /home/webperf-user
 
 RUN npm install -g lighthouse
 RUN npm install -g node-gyp
