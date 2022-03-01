@@ -9,7 +9,7 @@ LABEL name="webperf-core" \
 COPY . /webperf-core
 
 RUN apt-get update -y
-RUN dpkg --configure -a
+#RUN dpkg --configure -a
 RUN apt-get install apt-utils
 
 # Install deps + add Chrome Stable + purge all the things
