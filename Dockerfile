@@ -8,36 +8,47 @@ LABEL name="webperf-core" \
 #COPY entrypoint.sh /entrypoint.sh
 COPY . /webperf-core
 
-RUN export DEBIAN_FRONTEND="noninteractive"
+# RUN export DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get update -y
+
+
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/NAME.gpg --import
+RUN chown _apt /etc/apt/trusted.gpg.d/NAME.gpg
+#RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+RUN apt-get update -y
+RUN apt-get --only-upgrade install google-chrome-stable -y
+RUN apt-get install -y google-chrome-stable
+RUN google-chrome --version
+
 #RUN dpkg --configure -a
-RUN apt-get install apt-utils -y
+#RUN apt-get install apt-utils -y
 
 # Install deps + add Chrome Stable + purge all the things
-RUN apt-get update && apt-get install -y \
-  apt-transport-https \
-  ca-certificates \
-  curl \
-  gnupg \
-  --no-install-recommends \
-  && curl -sSL https://deb.nodesource.com/setup_12.x | bash - \
-  && curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
-  && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
-  && apt-get update && apt-get install -y \
-  google-chrome-stable \
-  fontconfig \
-  fonts-ipafont-gothic \
-  fonts-wqy-zenhei \
-  fonts-thai-tlwg \
-  fonts-kacst \
-  fonts-symbola \
-  fonts-noto \
-  fonts-freefont-ttf \
-  nodejs \
-  --no-install-recommends \
-  && apt-get purge --auto-remove -y curl gnupg \
-  && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install -y \
+#   apt-transport-https \
+#   ca-certificates \
+#   curl \
+#   gnupg \
+#   --no-install-recommends \
+#   && curl -sSL https://deb.nodesource.com/setup_12.x | bash - \
+#   && curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+#   && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+#   && apt-get update && apt-get install -y \
+#   google-chrome-stable \
+#   fontconfig \
+#   fonts-ipafont-gothic \
+#   fonts-wqy-zenhei \
+#   fonts-thai-tlwg \
+#   fonts-kacst \
+#   fonts-symbola \
+#   fonts-noto \
+#   fonts-freefont-ttf \
+#   nodejs \
+#   --no-install-recommends \
+#   && apt-get purge --auto-remove -y curl gnupg \
+#   && rm -rf /var/lib/apt/lists/*
 
 
 RUN apt-get install default-jre -y
@@ -56,13 +67,6 @@ RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
 
 RUN wget -q -O vnu.jar https://github.com/validator/validator/releases/download/latest/vnu.jar
-
-#RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
-#RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-#RUN apt-get update -y
-# RUN apt-get --only-upgrade install google-chrome-stable
-#RUN apt-get install -y google-chrome-stable
-#RUN google-chrome --version
 
 
 # Add Chrome as a user
