@@ -75,7 +75,7 @@ RUN npm fund
 # Run Chrome non-privileged
 USER webperf-user
 
-RUN lighthouse https://webperf.se/ --output json --output-path stdout --locale {3} --only-categories {0} --form-factor {2} --chrome-flags="--headless" --quiet
+RUN lighthouse https://webperf.se/ --output json --output-path stdout --locale en --only-categories performance --form-factor mobile --chrome-flags="--headless" --quiet
 
 # Executes `entrypoint.sh` when the Docker container starts up
 ENTRYPOINT ["/webperf-core/entrypoint.sh"]
