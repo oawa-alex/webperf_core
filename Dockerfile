@@ -1,7 +1,9 @@
 # Container image that runs your code
 #FROM ubuntu:latest
 FROM python:latest
-
+LABEL name="webperf-core" \
+  maintainer="Mattias <mattias@webperf.se>" \
+  description="The project goal is to help identify and improve the web over time, one improvment at a time. It tries to do this by giving you a weighted list of improvment you can (and probably should do) to your website."
 # Copies your code file from your action repository to the filesystem path `/` of the container
 #COPY entrypoint.sh /entrypoint.sh
 COPY . /webperf-core
@@ -72,6 +74,8 @@ RUN npm fund
 
 # Run Chrome non-privileged
 USER webperf-user
+
+RUN lighthouse https://webperf.se/ --output json --output-path stdout --locale {3} --only-categories {0} --form-factor {2} --chrome-flags="--headless" --quiet
 
 # Executes `entrypoint.sh` when the Docker container starts up
 ENTRYPOINT ["/webperf-core/entrypoint.sh"]
