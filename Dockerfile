@@ -65,7 +65,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install -g lighthouse
 RUN npm install -g node-gyp
-RUN npm install -g yellowlabtools
+#RUN npm install -g yellowlabtools
 # Give us a updated list of project that want funding so we can update it on our page
 RUN npm fund
 
