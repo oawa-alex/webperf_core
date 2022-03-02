@@ -64,6 +64,7 @@ RUN groupadd -r webperf
 RUN useradd -r -g webperf -G audio,video webperf
 RUN mkdir -p /home/webperf/reports
 RUN chown -R webperf:webperf /home/webperf
+RUN chown -R webperf:webperf /webperf-core/
 USER webperf
 
 
