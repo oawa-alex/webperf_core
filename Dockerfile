@@ -69,6 +69,8 @@ RUN useradd -r -g webperf -G audio,video webperf
 RUN mkdir -p /home/webperf/reports
 RUN chown -R webperf:webperf /home/webperf
 RUN chown -R webperf:webperf /webperf-core/
+RUN mkdir -p /usr/lib/node_modules
+RUN chown -R webperf:webperf /usr/lib/node_modules
 USER webperf
 
 
