@@ -55,19 +55,28 @@ RUN apt-get install default-jre -y
 #RUN apt-get install -y python3.x --no-install-recommends
 #RUN apt install python3-pip
 
+RUN chmod +x /webperf-core/entrypoint.sh
+
+RUN apt-get install libjpeg-dev libfontconfig -y
+
+
+RUN groupadd -r webperf
+RUN useradd -r -g webperf -G audio,video webperf
+RUN mkdir -p /home/webperf/reports
+RUN chown -R webperf:webperf /home/webperf
+USER webperf
+
+
 RUN python -m pip install --upgrade pip
 RUN pip install -r /webperf-core/requirements.txt
 RUN python /webperf-core/.github/workflows/verify_result.py -c false
-RUN python /webperf-core/.github/workflows/verify_result.py -d
-
-RUN chmod +x /webperf-core/entrypoint.sh
-RUN chmod +x /webperf-core/docker-cmd.sh
+#RUN python /webperf-core/.github/workflows/verify_result.py -d
+#RUN chmod +x /webperf-core/docker-cmd.sh
 
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
 
 RUN wget -q -O vnu.jar https://github.com/validator/validator/releases/download/latest/vnu.jar
-
 
 # Add Chrome as a user
 #RUN groupadd -r webperf-user && useradd -r -g webperf-user -G audio,video webperf-user \
@@ -75,7 +84,7 @@ RUN wget -q -O vnu.jar https://github.com/validator/validator/releases/download/
 
 RUN npm install -g lighthouse
 RUN npm install -g node-gyp
-RUN apt-get install libjpeg-dev libfontconfig -y
+# RUN apt-get install libjpeg-dev libfontconfig -y
 #RUN npm install -g yellowlabtools
 
 #RUN /webperf-core/docker-cmd.sh
@@ -84,10 +93,10 @@ RUN apt-get install libjpeg-dev libfontconfig -y
 RUN npm fund
 
 # Run Chrome non-privileged
-#USER webperf-user
+#USER webperf
 
 #RUN lighthouse https://webperf.se/ --output json --output-path stdout --locale en --only-categories performance --form-factor mobile --chrome-flags="--headless --disable-gpu --no-sandbox"
-RUN lighthouse https://webperf.se/ --output json --output-path stdout --locale en --only-categories performance --form-factor mobile --chrome-flags="--headless --disable-gpu --no-sandbox" --quiet
+RUN lighthouse https://webperf.se/ --output json --output-path stdout --locale en --only-categories performance --form-factor mobile --chrome-flags="--headless --disable-gpu" --quiet
 
 # Executes `entrypoint.sh` when the Docker container starts up
 ENTRYPOINT ["/webperf-core/entrypoint.sh"]
