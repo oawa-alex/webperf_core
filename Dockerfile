@@ -59,6 +59,8 @@ RUN chmod +x /webperf-core/entrypoint.sh
 
 RUN apt-get install libjpeg-dev libfontconfig -y
 
+RUN wget -q -O vnu.jar https://github.com/validator/validator/releases/download/latest/vnu.jar
+
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
 
@@ -75,8 +77,6 @@ RUN pip install -r /webperf-core/requirements.txt
 RUN python /webperf-core/.github/workflows/verify_result.py -c false
 #RUN python /webperf-core/.github/workflows/verify_result.py -d
 #RUN chmod +x /webperf-core/docker-cmd.sh
-
-RUN wget -q -O vnu.jar https://github.com/validator/validator/releases/download/latest/vnu.jar
 
 # Add Chrome as a user
 #RUN groupadd -r webperf-user && useradd -r -g webperf-user -G audio,video webperf-user \
