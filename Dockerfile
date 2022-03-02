@@ -59,6 +59,8 @@ RUN chmod +x /webperf-core/entrypoint.sh
 
 RUN apt-get install libjpeg-dev libfontconfig -y
 
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
 
 RUN groupadd -r webperf
 RUN useradd -r -g webperf -G audio,video webperf
@@ -73,9 +75,6 @@ RUN pip install -r /webperf-core/requirements.txt
 RUN python /webperf-core/.github/workflows/verify_result.py -c false
 #RUN python /webperf-core/.github/workflows/verify_result.py -d
 #RUN chmod +x /webperf-core/docker-cmd.sh
-
-RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt-get install -y nodejs
 
 RUN wget -q -O vnu.jar https://github.com/validator/validator/releases/download/latest/vnu.jar
 
