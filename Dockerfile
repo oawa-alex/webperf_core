@@ -63,6 +63,12 @@ RUN wget -q -O vnu.jar https://github.com/validator/validator/releases/download/
 
 RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
+RUN npm install -g lighthouse
+RUN npm install -g node-gyp
+RUN npm install -g yellowlabtools
+# Give us a updated list of project that want funding so we can update it on our page
+RUN npm fund
+
 
 RUN groupadd -r webperf
 RUN useradd -r -g webperf -G audio,video webperf
@@ -84,15 +90,13 @@ RUN python /webperf-core/.github/workflows/verify_result.py -c false
 #RUN groupadd -r webperf-user && useradd -r -g webperf-user -G audio,video webperf-user \
 #  && mkdir -p /home/webperf-user/reports && chown -R webperf-user:webperf-user /home/webperf-user
 
-RUN npm install -g lighthouse
-RUN npm install -g node-gyp
+# RUN npm install -g lighthouse
+# RUN npm install -g node-gyp
 # RUN apt-get install libjpeg-dev libfontconfig -y
 #RUN npm install -g yellowlabtools
 
 #RUN /webperf-core/docker-cmd.sh
 
-# Give us a updated list of project that want funding so we can update it on our page
-RUN npm fund
 
 # Run Chrome non-privileged
 #USER webperf
