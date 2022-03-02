@@ -101,8 +101,8 @@ RUN python /webperf-core/.github/workflows/verify_result.py -c false
 # Run Chrome non-privileged
 #USER webperf
 
-#RUN lighthouse https://webperf.se/ --output json --output-path stdout --locale en --only-categories performance --form-factor mobile --chrome-flags="--headless --disable-gpu --no-sandbox"
-RUN lighthouse https://webperf.se/ --output json --output-path stdout --locale en --only-categories performance --form-factor mobile --chrome-flags="--headless --disable-gpu" --quiet
+#RUN lighthouse https://webperf.se/ --output json --output-path stdout --locale en --only-categories performance --form-factor mobile --chrome-flags="--headless --disable-gpu --no-sandbox" --quiet
+RUN lighthouse https://webperf.se/ --output json --output-path stdout --locale en --only-categories performance --form-factor mobile --chrome-flags="--headless --disable-gpu"
 
 # Executes `entrypoint.sh` when the Docker container starts up
 ENTRYPOINT ["/webperf-core/entrypoint.sh"]
