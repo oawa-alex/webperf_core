@@ -83,7 +83,14 @@ def create_docker_steps():
                     if 'shell: bash' in tmp:
                         continue
 
-                    #tmp = tmp.replace('sudo ', '')
+                    if 'dl-ssl.google.com' in tmp:
+                        continue
+                    if 'dl.google.com' in tmp:
+                        continue
+                    if 'install google-chrome-stable' in tmp:
+                        continue
+
+                    tmp = tmp.replace('sudo ', '')
                     #tmp = tmp.replace('npm install -g ', 'npm install ')
 
                     # only add a command once
