@@ -20,7 +20,10 @@ RUN groups webperf
 # RUN chown -R webperf:webperf /usr/lib/node_modules
 USER webperf
 
-# RUN sudo apt-get update -y
+RUN python -m pip install --upgrade pip
+RUN pip install -r /webperf-core/requirements.txt
+RUN python /webperf-core/.github/workflows/verify_result.py -c false
+RUN python /webperf-core/.github/workflows/verify_result.py -d
 RUN chmod +x /webperf-core/docker-cmd.sh
 RUN /webperf-core/docker-cmd.sh
 
