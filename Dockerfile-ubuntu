@@ -9,6 +9,12 @@ LABEL name="webperf-core" \
 COPY . /webperf-core
 
 
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/NAME.gpg --import
+RUN chown _apt /etc/apt/trusted.gpg.d/NAME.gpg
+#RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+
+
 RUN groupadd -r webperf
 RUN useradd -r -g webperf -G audio,video webperf
 RUN usermod -aG sudo webperf
@@ -21,10 +27,10 @@ RUN groups webperf
 USER webperf
 
 # Install Google Chrome
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/NAME.gpg --import
-RUN chown _apt /etc/apt/trusted.gpg.d/NAME.gpg
-#RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+# RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/NAME.gpg --import
+# RUN chown _apt /etc/apt/trusted.gpg.d/NAME.gpg
+# #RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 
+# RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 RUN apt-get update -y
 RUN apt-get --only-upgrade install google-chrome-stable -y
 RUN apt-get install -y google-chrome-stable
