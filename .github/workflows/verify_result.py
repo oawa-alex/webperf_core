@@ -38,8 +38,8 @@ def create_docker_steps():
             continue
 
         # ignore tracking and sitespeed temporarly
-        if 'tracking' in filename or 'sitespeed' in filename:
-            continue
+        # if 'tracking' in filename or 'sitespeed' in filename:
+        #     continue
 
         # ignore pa11y temporarly
         if 'pa11y' in filename:
@@ -83,7 +83,7 @@ def create_docker_steps():
                     if 'shell: bash' in tmp:
                         continue
 
-                    tmp = tmp.replace('sudo ', '')
+                    #tmp = tmp.replace('sudo ', '')
                     #tmp = tmp.replace('npm install -g ', 'npm install ')
 
                     # only add a command once
