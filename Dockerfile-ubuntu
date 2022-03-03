@@ -15,13 +15,14 @@ RUN usermod -aG sudo webperf
 RUN mkdir -p /home/webperf/reports
 RUN chown -R webperf:webperf /home/webperf
 RUN chown -R webperf:webperf /webperf-core/
+RUN groups webperf
 # RUN mkdir -p /usr/lib/node_modules
 # RUN chown -R webperf:webperf /usr/lib/node_modules
 USER webperf
 
 # RUN sudo apt-get update -y
-RUN sudo chmod +x /webperf-core/docker-cmd.sh
-RUN sudo /webperf-core/docker-cmd.sh
+RUN chmod +x /webperf-core/docker-cmd.sh
+RUN /webperf-core/docker-cmd.sh
 
 
 # RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/NAME.gpg --import
