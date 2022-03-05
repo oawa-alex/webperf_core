@@ -20,6 +20,13 @@ RUN apt-get --only-upgrade install google-chrome-stable -y
 RUN apt-get install -y google-chrome-stable
 RUN google-chrome --version
 
+# Install Java
+RUN apt-get install default-jre -y
+
+# Install NodeJS
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
 # Create user and group and run with it
 RUN groupadd -r webperf
 RUN useradd -r -g webperf -G audio,video webperf
@@ -41,13 +48,6 @@ USER webperf
 # RUN apt-get --only-upgrade install google-chrome-stable -y
 # RUN apt-get install -y google-chrome-stable
 # RUN google-chrome --version
-
-# Install Java
-RUN apt-get install default-jre -y
-
-# Install NodeJS
-RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt-get install -y nodejs
 
 # 
 RUN python -m pip install --upgrade pip
