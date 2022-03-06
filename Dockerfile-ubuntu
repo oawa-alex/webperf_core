@@ -59,10 +59,9 @@ USER root
 
 RUN chmod +x /webperf-core/docker-cmd.sh
 
-USER webperf
-
 RUN /webperf-core/docker-cmd.sh
 
+USER webperf
 
 # RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/NAME.gpg --import
 # RUN chown _apt /etc/apt/trusted.gpg.d/NAME.gpg
