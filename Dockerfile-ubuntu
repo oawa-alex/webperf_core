@@ -50,10 +50,10 @@ USER webperf
 # RUN google-chrome --version
 
 # 
-RUN python -m pip install --upgrade pip
+# RUN python -m pip install --upgrade pip
 #RUN pip install -r /webperf-core/requirements.txt
-RUN python /webperf-core/.github/workflows/verify_result.py -c false
-RUN python /webperf-core/.github/workflows/verify_result.py -d
+# RUN python /webperf-core/.github/workflows/verify_result.py -c false
+# RUN python /webperf-core/.github/workflows/verify_result.py -d
 
 USER root
 

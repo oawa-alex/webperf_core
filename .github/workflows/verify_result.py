@@ -90,6 +90,9 @@ def create_docker_steps():
                     if 'install google-chrome-stable' in tmp:
                         continue
 
+                    if 'npm install -g sitespeed.io' in tmp:
+                        continue
+
                     tmp = tmp.replace('sudo ', '')
                     #tmp = tmp.replace('npm install -g ', 'npm install ')
 
