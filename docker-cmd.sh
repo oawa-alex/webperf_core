@@ -9,6 +9,3 @@ wget -q -O data/blocklistproject-ads-nl.txt https://blocklistproject.github.io/L
 wget -q -O data/blocklistproject-tracking-nl.txt https://blocklistproject.github.io/Lists/alt-version/tracking-nl.txt
 wget -q -O data/disconnect-services.json https://raw.githubusercontent.com/disconnectme/disconnect-tracking-protection/master/services.json
 wget -q -O - https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz | tar -xvzf -
-npm install -g node-gyp
-apt-get install libjpeg-dev libfontconfig
-npm install -g yellowlabtools
