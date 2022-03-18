@@ -65,6 +65,10 @@ RUN /webperf-core/docker-cmd.sh
 
 USER webperf
 
+RUN python -m pip install --upgrade pip
+RUN python -m pip install --upgrade setuptools
+RUN python -m pip install pyssim Pillow image
+
 # RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/NAME.gpg --import
 # RUN chown _apt /etc/apt/trusted.gpg.d/NAME.gpg
 # #RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - 

@@ -103,6 +103,7 @@ RUN python /webperf-core/.github/workflows/verify_result.py -c false
 #USER webperf
 
 RUN sed -i -e 's/\-\-headless/\-\-headless  \-\-disable\-gpu \-\-no\-sandbox/g' /webperf-core/tests/lighthouse_base.py
+RUN sed -i -e 's/\" --quiet/\" /g' /webperf-core/tests/lighthouse_base.py
 RUN cat /webperf-core/tests/lighthouse_base.py
 #RUN lighthouse https://webperf.se/ --output json --output-path stdout --locale en --only-categories performance --form-factor mobile --chrome-flags="--headless --disable-gpu --no-sandbox" --quiet
 #RUN lighthouse https://webperf.se/ --output json --output-path stdout --locale en --only-categories performance --form-factor mobile --chrome-flags="--headless --disable-gpu"

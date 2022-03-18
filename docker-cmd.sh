@@ -3,9 +3,6 @@ wget -q -O vnu.jar https://github.com/validator/validator/releases/download/late
 npm install -g lighthouse
 apt-get update -y
 apt-get install -y imagemagick libjpeg-dev xz-utils --no-install-recommends --force-yes
-python -m pip install --upgrade pip
-python -m pip install --upgrade setuptools
-python -m pip install pyssim Pillow image
 apt install ffmpeg
 google-chrome --version
 wget -q -O data/blocklistproject-ads-nl.txt https://blocklistproject.github.io/Lists/alt-version/ads-nl.txt
