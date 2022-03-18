@@ -55,7 +55,7 @@ USER webperf
 # RUN python /webperf-core/.github/workflows/verify_result.py -c false
 # RUN python /webperf-core/.github/workflows/verify_result.py -d
 
-RUN pip install -r requirements.txt
+RUN pip install -r /webperf-core/requirements.txt
 
 USER root
 
