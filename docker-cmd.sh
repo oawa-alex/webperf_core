@@ -1,5 +1,4 @@
 cd /webperf-core
-pip install -r requirements.txt
 wget -q -O vnu.jar https://github.com/validator/validator/releases/download/latest/vnu.jar
 npm install -g lighthouse
 apt-get update -y

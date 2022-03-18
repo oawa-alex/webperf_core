@@ -55,6 +55,8 @@ USER webperf
 # RUN python /webperf-core/.github/workflows/verify_result.py -c false
 # RUN python /webperf-core/.github/workflows/verify_result.py -d
 
+RUN pip install -r requirements.txt
+
 USER root
 
 RUN chmod +x /webperf-core/docker-cmd.sh

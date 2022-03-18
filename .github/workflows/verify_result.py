@@ -83,6 +83,9 @@ def create_docker_steps():
                     if 'shell: bash' in tmp:
                         continue
 
+                    if 'pip install -r requirements.txt' in tmp:
+                        continue
+
                     if 'dl-ssl.google.com' in tmp:
                         continue
                     if 'dl.google.com' in tmp:
