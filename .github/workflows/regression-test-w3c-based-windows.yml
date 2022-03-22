@@ -1,11 +1,11 @@
-name: "Regression Test - CSS Validation Test"
+name: "Regression Test [Windows] - W3C Based Test(s)"
 on:
   push:
     paths-ignore:
       - '**.md'
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - name: Check out repository code
       uses: actions/checkout@v2
@@ -23,6 +23,11 @@ jobs:
     - name: Setup config (using SAMPLE-config.py as config.py)
       run: python .github/workflows/verify_result.py -c true
       if: ${{ success() }}
+    - name: Test HTML Validation (true)
+      run: |
+         python default.py -t 6 -r -u https://webperf.se/ -o .github/workflows/testresult-06.json
+         python .github/workflows/verify_result.py -t 6
+      if: ${{ success() }}
     - name: Test CSS Validation (true)
       run: |
          python default.py -t 7 -r -u https://webperf.se/ -o .github/workflows/testresult-07.json
@@ -30,6 +35,11 @@ jobs:
       if: ${{ success() }}
     - name: Setup config (using SAMPLE-config.py as config.py)
       run: python .github/workflows/verify_result.py -c false
+      if: ${{ success() }}
+    - name: Test HTML Validation (false)
+      run: |
+         python default.py -t 6 -r -u https://webperf.se/ -o .github/workflows/testresult-06.json
+         python .github/workflows/verify_result.py -t 6
       if: ${{ success() }}
     - name: Test CSS Validation (false)
       run: |
