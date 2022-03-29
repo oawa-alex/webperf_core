@@ -49,7 +49,7 @@ def get_errors_from_npm(test_type, params, data=None):
 
     bashCommand = "java -jar vnu.jar {0}".format(arg)
     process = subprocess.Popen(
-        bashCommand.split(), stdout=subprocess.PIPE, shell=True)
+        bashCommand, stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
 
     # print('output', output)

@@ -24,7 +24,7 @@ def get_result(sitespeed_use_docker, arg):
 
         import subprocess
         process = subprocess.Popen(
-            bashCommand.split(), stdout=subprocess.PIPE, shell=True)
+            bashCommand, stdout=subprocess.PIPE, shell=True)
         output, error = process.communicate()
         result = str(output)
     else:
@@ -32,7 +32,7 @@ def get_result(sitespeed_use_docker, arg):
 
         bashCommand = "sitespeed.io {0}".format(arg)
         process = subprocess.Popen(
-            bashCommand.split(), stdout=subprocess.PIPE, shell=True)
+            bashCommand, stdout=subprocess.PIPE, shell=True)
         output, error = process.communicate()
         result = str(output)
 

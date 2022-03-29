@@ -27,7 +27,7 @@ def run_test(_, langCode, url):
 
     bashCommand = "pa11y-ci --reporter json {0}".format(url)
     process = subprocess.Popen(
-        bashCommand.split(), stdout=subprocess.PIPE, shell=True)
+        bashCommand, stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
 
     json_result = json.loads(output)
