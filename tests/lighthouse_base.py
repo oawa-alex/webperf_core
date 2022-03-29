@@ -165,7 +165,8 @@ def get_json_result(langCode, url, googlePageSpeedApiKey, strategy, category, li
 
         bashCommand = "lighthouse {1} --output json --output-path stdout --locale {3} --only-categories {0} --form-factor {2} --chrome-flags=\"--headless\" --quiet".format(
             category, check_url, strategy, langCode)
-        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        process = subprocess.Popen(
+            bashCommand.split(), stdout=subprocess.PIPE, shell=True)
         output, error = process.communicate()
 
         get_content = output

@@ -23,14 +23,16 @@ def get_result(sitespeed_use_docker, arg):
             arg, data_dir)
 
         import subprocess
-        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        process = subprocess.Popen(
+            bashCommand.split(), stdout=subprocess.PIPE, shell=True)
         output, error = process.communicate()
         result = str(output)
     else:
         import subprocess
 
         bashCommand = "sitespeed.io {0}".format(arg)
-        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        process = subprocess.Popen(
+            bashCommand.split(), stdout=subprocess.PIPE, shell=True)
         output, error = process.communicate()
         result = str(output)
 

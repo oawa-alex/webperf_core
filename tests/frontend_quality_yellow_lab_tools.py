@@ -77,7 +77,8 @@ def run_test(_, langCode, url, device='phone'):
         import subprocess
 
         bashCommand = "yellowlabtools {0}".format(url)
-        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        process = subprocess.Popen(
+            bashCommand.split(), stdout=subprocess.PIPE, shell=True)
         output, error = process.communicate()
 
         result_json = output

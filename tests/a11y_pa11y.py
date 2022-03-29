@@ -26,7 +26,8 @@ def run_test(_, langCode, url):
         datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 
     bashCommand = "pa11y-ci --reporter json {0}".format(url)
-    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+    process = subprocess.Popen(
+        bashCommand.split(), stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
 
     json_result = json.loads(output)
