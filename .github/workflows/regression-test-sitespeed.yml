@@ -21,7 +21,7 @@ jobs:
     - name: Test Performance (Sitespeed.io) - USE DOCKER
       run: |
          python .github/workflows/verify_result.py -c true
-         python default.py -t 15 -r -u https://oawa.se/ -o .github/workflows/testresult-15.json
+         python default.py -t 15 -r -u https://klostra.se/ -o .github/workflows/testresult-15.json
          python .github/workflows/verify_result.py -t 15
       if: ${{ success() }}
     - name: Setup Node.js (v1 version 14.x)
@@ -51,7 +51,7 @@ jobs:
     - name: Test Performance (Sitespeed.io) - USE NPM PACKAGE
       run: |
          python .github/workflows/verify_result.py -c false
-         python default.py -t 15 -r -u https://oawa.se/ -o .github/workflows/testresult-15.json
+         python default.py -t 15 -r -u https://klostra.se/ -o .github/workflows/testresult-15.json
          python .github/workflows/verify_result.py -t 15
       if: ${{ success() }}
     - name: Test Directory
